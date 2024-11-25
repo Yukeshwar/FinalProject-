@@ -1,60 +1,69 @@
-# p5.js Template
+Final Project Ideas:
 
-This is a README file that can be used to describe and document your assignment.
+Idea 1: White Nights – An Interactive Tale
+Why I Chose This Topic:
+Dostoevsky is one of my favorite authors, and his works resonate deeply with me. He’s the father of dark philosophy, often exploring loneliness and human fragility. White Nights is my favorite short story of his, and it captures the themes of fleeting love and existential longing, which I find fascinating.
 
-Markdown Cheatsheet (from [https://www.markdownguide.org/cheat-sheet/](https://www.markdownguide.org/cheat-sheet/)):
+Implementation:
+p5.js:
 
----
----
+Create dynamic visuals such as cobwebs, streetlamps, and moonlight to symbolize the narrator’s emotional state.
+Use interactive elements like sliders and buttons to control:
+The brightness of the streetlamp (clearing cobwebs).
+The movement of the bench under the moonlight.
+Add a text box for narration and minimal dialogue between the narrator and Nastenka.
+Arduino:
 
-# Heading1
-## Heading2
-### Heading3
-#### Heading4
-##### Heading5
-###### Heading6
+Inputs:
+Sliders to adjust streetlamp brightness and bench positioning.
+Buttons to advance dialogue or trigger narration.
+Outputs:
+RGB LEDs to reflect emotional tones (gold for hope, gray for despair).
+Vibration motor to simulate tension during emotional peaks (e.g., heartbreak).
 
-**bold text**
+Idea 2: The Godfather
+Why I Chose This Topic:
+The Godfather is not only one of the greatest films ever made, but it’s also a cherished memory for me. I watched it with my grandfather, who explained the intricate plot as we sat together. This project is a tribute to both the movie and the values it explores, like loyalty, power, and the consequences of betrayal.
 
-*italicized text*
+Implementation:
+p5.js:
 
-~~strikethrough text~~
+Create a dynamic map showing territories:
+Green for controlled areas, red for rival territories.
+Add visual elements like:
+A golden rose symbolizing family loyalty.
+A cracked portrait of the Don that worsens with betrayal.
+Include animations for deal-making, betrayal, and territorial expansion.
+Arduino:
 
-Ordered List:
-1. First item
-2. Second item
-3. Third item
+Inputs:
+Knobs to adjust resources (money, men) for territory expansion.
+Buttons to make strategic decisions (punish, forgive, negotiate).
+Outputs:
+LEDs to show success (green) or failure (red).
+A buzzer to signal risky actions or betrayal.
+Vibration motor for tension-filled moments, such as betrayals or territorial disputes.
 
-Unordered List:
-- First item
-- Second item
-- Third item
+Idea 3:Neon Genesis Evangalion : Interactive Eva Synchronization Test
 
-`short code block`
+Why I Chose This Topic:
 
-```
-extended code block
-fun() {
-  return 0
-}
-```
+Neon Genesis Evangelion is my favorite anime of all time. It’s a deeply psychological series with complex themes like identity and existentialism. Its dark tone, layered characters, and biblical references make it uniquely compelling. The synchronization tests between the Eva pilots and their mechs are iconic, and I want to recreate that intense experience.
 
-Link:  
-[linked text](https://www.example.com)
+Implementation:
+p5.js:
 
+Design a NERV-inspired interface showing:
+Synchronization percentage.
+Energy levels and heartbeat of the Eva Unit.
+Animate the Eva Unit powering up as the sync rate increases.
+Include dynamic visuals and sound effects (e.g., alert tones, “synchronization complete” voice prompts).
+Arduino:
 
-Image with url:  
-![image description](https://dm-gy-6063-2024f-b.github.io/assets/homework/02/clark-espaco-modulado-00.jpg)
+Inputs:
+Knobs or sliders to adjust sync levels, representing the user’s control over the Eva.
+Outputs:
+LEDs to indicate synchronization status (green for high sync, red for failure).
+Vibration motor to provide tactile feedback for sync failure or stress scenarios.
 
-
-Image on repo:  
-![image description](./file-name.jpg)
-
-
-To start a new line, add two spaces at the end of a line, like this:  
-this is a new line.
-
-
-To start a new paragraph, leave an empty line between two lines of text.
-
-This is a new paragraph.
+I've added a PDF document with sketches of my ideas (its really bad,i am sorry) 
