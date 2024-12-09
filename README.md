@@ -1,3 +1,15 @@
+Milestone 3: 
+
+The project aimed to simulate territory control, betrayal, and forgiveness through an interactive experience using Arduino and p5.js. The prototype successfully integrates hardware components with visual elements, providing real-time updates and feedback. The development work involved creating a sketch file for visualizing the gameplay, writing the Arduino code to control the hardware, and connecting the two via serial communication.
+
+The sketch file (sketch.js) was developed to display a dynamic map representing Corleone and rival territories. The map visually grows or shrinks based on player actions, with green areas signifying Corleone-controlled territory and red areas representing rival-controlled zones. Smooth animations were implemented using the lerp() function to ensure visually appealing transitions. Potentiometers were used to adjust resources like money and manpower, influencing the map dynamics. Buttons allowed players to trigger "Punish" or "Forgive" actions, leading to changes in the map and corresponding animations to reflect betrayal or negotiation.
+
+The Arduino file was written to manage inputs and outputs from physical components. Potentiometers provided analog inputs for money and manpower values, while buttons were programmed to trigger actions such as "Punish" or "Forgive." LEDs were used to give visual feedback, with green indicating successful negotiations and red signaling betrayal. A buzzer was included to create auditory cues during high-stakes moments, while a solenoid delivered a physical knock effect during betrayal actions, adding drama to the gameplay. A mini servo was programmed to reflect money allocation by adjusting its angle dynamically, providing an additional layer of visual feedback.
+
+The hardware components included potentiometers for resource adjustment, buttons for triggering actions, LEDs for feedback, a buzzer for tension-filled cues, a solenoid for physical interactions, and a mini servo to visually represent resource distribution. Pull-down resistors ensured accurate button readings, and a transistor circuit was used to safely control the solenoid.
+
+I have attached the Circuit schematic and FSM diagram.
+
 Milestone 2: The Godfather Project Proposal and Development Plan
 
 The project titled The Godfather is an interactive tribute to the timeless themes of loyalty, power, and betrayal portrayed in The Godfather. Drawing inspiration from the intricate plot and emotional depth of the movie, this project seeks to blend storytelling, interactivity, and technology to create a dynamic and immersive experience. By combining visual elements with tactile interactions, the project will provide users with an engaging narrative-driven simulation that captures the essence of the film.
