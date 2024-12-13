@@ -1,32 +1,36 @@
 #include <Servo.h>
 
-// Pin Definitions
-int potMoney = A0;
-int potManpower = A1;
-int buttonPunish = 2;
-int buttonForgive = 3;
-int ledGreen = 4;
-int ledRed = 5;
-int buzzer = 6;
-int solenoidPin = 8;
 Servo myServo;
 
-void setup() {
-  pinMode(buttonPunish, INPUT_PULLUP);
-  pinMode(buttonForgive, INPUT_PULLUP);
-  pinMode(ledGreen, OUTPUT);
-  pinMode(ledRed, OUTPUT);
-  pinMode(buzzer, OUTPUT);
-  pinMode(solenoidPin, OUTPUT);
+// Pin Definitions
+int potMoney = A0;       // Potentiometer for Money
+int potManpower = A1;    // Potentiometer for Manpower
+int buttonPunish = 2;    // Button for Punish action
+int buttonForgive = 3;   // Button for Forgive action
+int ledGreen = 4;        // Green LED
+int ledRed = 5;          // Red LED
+int buzzer = 11;         // Active Buzzer
 
-  myServo.attach(9); 
-  myServo.write(0);  
-  Serial.begin(9600); 
+unsigned long lastServoUpdate = 0; // Tracks the last time the servo was updated
+int servoAngle = 0; // Current angle of the servo
+
+void setup() {
+  pinMode(buttonPunish, INPUT); // Set Punish button as INPUT
+  pinMode(buttonForgive, INPUT); // Set Forgive button as INPUT
+  pinMode(ledGreen, OUTPUT); // Green LED
+  pinMode(ledRed, OUTPUT); // Red LED
+  pinMode(buzzer, OUTPUT); // Set buzzer as OUTPUT
+  //myServo.attach(10); // Attach servo to pin 10
+
+  // Ensure buzzer starts OFF
+  digitalWrite(buzzer, HIGH);
+
+  Serial.begin(9600); // Begin serial communication with p5.js
 }
 
 void loop() {
-  // potentiometers
-  int money = analogRead(potMoney) / 4;
+  // Read potentiometer values
+  int money = analogRead(potMoney) / 4;    // Scale to 0-255
   int manpower = analogRead(potManpower) / 4;
 
   // Send data to p5.js
@@ -35,28 +39,36 @@ void loop() {
   Serial.print(" Manpower:");
   Serial.println(manpower);
 
-  // Adjust servo for money allocation
-  int servoAngle = map(money, 0, 255, 0, 180);
-  myServo.write(servoAngle);
+  // Update servo angle like a minute hand
+  unsigned long currentMillis = millis();
+  if (currentMillis - lastServoUpdate >= 1000) { // Update every second
+    lastServoUpdate = currentMillis;
+    servoAngle += 3; // Move by 3 degrees (180°/60 seconds)
+    if (servoAngle > 180) {
+      servoAngle = 0; // Reset to 0 after completing a full cycle
+    }
+    myServo.write(servoAngle); // Move servo to the new angle
+    Serial.print("Servo Angle: ");
+    Serial.println(servoAngle);
+  }
 
-  // Handle button inputs
-  if (digitalRead(buttonPunish) == LOW) {
+  // Handle Punish Button
+  if (digitalRead(buttonPunish) == HIGH) { // Button is pressed
     Serial.println("Action:Punish");
-    digitalWrite(ledRed, HIGH);
-    tone(buzzer, 1000, 200);
-    digitalWrite(solenoidPin, HIGH); // Solenoid knock
-    delay(200);
-    digitalWrite(solenoidPin, LOW);
-    delay(1000);
-    digitalWrite(ledRed, LOW);
+    digitalWrite(ledRed, HIGH);  // Turn on Red LED
+    digitalWrite(buzzer, LOW); // Turn on Buzzer
+  } else { // Button is not pressed
+    digitalWrite(ledRed, LOW);   // Turn off Red LED
+    digitalWrite(buzzer, HIGH);  // Turn off Buzzer
   }
 
-  if (digitalRead(buttonForgive) == LOW) {
+  // Handle Forgive Button
+  if (digitalRead(buttonForgive) == HIGH) { // Button is pressed
     Serial.println("Action:Forgive");
-    digitalWrite(ledGreen, HIGH);
-    delay(1000);
-    digitalWrite(ledGreen, LOW);
+    digitalWrite(ledGreen, HIGH);  // Turn on Green LED
+  } else { // Button is not pressed
+    digitalWrite(ledGreen, LOW);   // Turn off Green LED
   }
 
-  delay(100);
+  delay(50); // Small delay for stability
 }
