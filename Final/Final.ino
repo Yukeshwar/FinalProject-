@@ -4,6 +4,8 @@
 Servo myServo;
 
 // Pin Definitions
+const int potMoney = A0;       // Potentiometer for Money
+const int potMen = A1;         // Potentiometer for Men
 const int buttonPunish = 2;    // Button for Punish action
 const int buttonForgive = 3;   // Button for Forgive action
 const int ledGreen = 4;        // Green LED
@@ -15,12 +17,12 @@ unsigned long lastServoUpdate = 0; // Tracks the last time the servo was updated
 int servoAngle = 0; // Current angle of the servo
 
 void setup() {
-  pinMode(buttonPunish, INPUT);       // Set Punish button as INPUT
-  pinMode(buttonForgive, INPUT);     // Set Forgive button as INPUT
-  pinMode(ledGreen, OUTPUT);         // Green LED
-  pinMode(ledRed, OUTPUT);           // Red LED
-  pinMode(buzzer, OUTPUT);           // Set buzzer as OUTPUT
-  myServo.attach(servoPin);          // Attach servo to pin 10
+  pinMode(buttonPunish, INPUT); // Configure buttons as INPUT (pull-down resistors handle state)
+  pinMode(buttonForgive, INPUT);
+  pinMode(ledGreen, OUTPUT);    // Green LED
+  pinMode(ledRed, OUTPUT);      // Red LED
+  pinMode(buzzer, OUTPUT);      // Buzzer as OUTPUT
+  myServo.attach(servoPin);     // Attach servo to pin 10
 
   // Ensure buzzer starts OFF
   digitalWrite(buzzer, HIGH);
@@ -29,6 +31,10 @@ void setup() {
 }
 
 void loop() {
+  // Read potentiometer values
+  int moneyValue = analogRead(potMoney); // Raw value from potentiometer (0-1023)
+  int menValue = analogRead(potMen);     // Raw value from potentiometer (0-1023)
+
   // Update servo angle like a minute hand
   unsigned long currentMillis = millis();
   if (currentMillis - lastServoUpdate >= 1000) { // Update every second
@@ -41,7 +47,7 @@ void loop() {
   }
 
   // Handle Punish Button
-  bool punishPressed = digitalRead(buttonPunish) == HIGH;
+  bool punishPressed = digitalRead(buttonPunish) == HIGH; // Button is HIGH when pressed
   if (punishPressed) {
     digitalWrite(ledRed, HIGH);   // Turn on Red LED
     digitalWrite(buzzer, LOW);   // Turn on Buzzer
@@ -51,7 +57,7 @@ void loop() {
   }
 
   // Handle Forgive Button
-  bool forgivePressed = digitalRead(buttonForgive) == HIGH;
+  bool forgivePressed = digitalRead(buttonForgive) == HIGH; // Button is HIGH when pressed
   if (forgivePressed) {
     digitalWrite(ledGreen, HIGH);  // Turn on Green LED
   } else {
@@ -59,21 +65,32 @@ void loop() {
   }
 
   // Send JSON data to p5.js
-  sendJsonData(punishPressed, forgivePressed, servoAngle);
+  sendJsonData(moneyValue, menValue, punishPressed, forgivePressed, servoAngle);
 
   delay(50); // Small delay for stability
 }
 
-void sendJsonData(bool punish, bool forgive, int servoAngle) {
+void sendJsonData(int money, int men, bool punish, bool forgive, int servoAngle) {
   // Create JSON object
   StaticJsonDocument<128> json;
   JsonObject data = json.createNestedObject("data");
 
-  data["punish"] = punish ? 1 : 0;  // Send punish status
-  data["forgive"] = forgive ? 1 : 0; // Send forgive status
-  data["servoAngle"] = servoAngle;
+  JsonObject A0 = data.createNestedObject("A0");
+  A0["value"] = money; // Send money potentiometer value
+
+  JsonObject A1 = data.createNestedObject("A1");
+  A1["value"] = men; // Send men potentiometer value
+
+  JsonObject D2 = data.createNestedObject("D2");
+  D2["count"] = punish ? 1 : 0; // Send punish button status
+
+  JsonObject D3 = data.createNestedObject("D3");
+  D3["count"] = forgive ? 1 : 0; // Send forgive button status
+
+  JsonObject servo = data.createNestedObject("servo");
+  servo["angle"] = servoAngle; // Send servo angle
 
   // Serialize and send JSON
   serializeJson(json, Serial);
-  Serial.println();
+  Serial.println(); // Ensure newline after each JSON object
 }
