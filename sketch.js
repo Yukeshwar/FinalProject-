@@ -63,7 +63,9 @@ const quotes = {
 let cracks = [];
 
 function preload() {
-  bgImage = loadImage("bg.png"); // Load background image
+  themeSong = loadSound('theme.mp3'); // Load the music file
+ 
+  bgImage = loadImage("bg.png"); 
   mafiaMap = loadImage("Mafia_Map.jpg");
   menImage = loadImage("men.jpg");
   moneyImage = loadImage("money.png");
@@ -83,6 +85,13 @@ function setup() {
 
   readyToReceive = false;
 }
+
+function mousePressed() {
+  if (!themeSong.isPlaying()) {
+    themeSong.loop(); // Start or loop the background music
+  }
+}
+
 
 function draw() {
   // Draw the background image
