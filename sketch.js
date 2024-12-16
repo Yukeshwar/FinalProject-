@@ -8,11 +8,11 @@ let readyToReceive = false;
 let menCount = 0; // Controlled by pot1 (A0)
 let moneyCount = 0; // Controlled by pot2 (A1)
 let conversationStage = 0;
-let alphaRegion1 = 100; // Reduced intensity of Region 1 green
-let alphaRegion2 = 50;  // Initial transparency for Rival 1 (red)
-let alphaRegion3 = 50;  // Initial transparency for Rival 2 (red)
-let region2Converted = false; // Ensure Region 2 transitions only once
-let region3Converted = false; // Ensure Region 3 transitions only once
+let alphaRegion1 = 100; 
+let alphaRegion2 = 50;  
+let alphaRegion3 = 50;  
+let region2Converted = false; // Ensure Region 2 transitions 
+let region3Converted = false; // Ensure Region 3 transitions 
 let forgivePressed = false;
 let punishPressed = false;
 
@@ -104,7 +104,7 @@ function draw() {
   handleConversations();
 
   if (mSerial.opened() && readyToReceive) {
-    mSerial.write(0xAB); // Request data
+    mSerial.write(0xAB); 
     readyToReceive = false;
   }
 
@@ -156,7 +156,7 @@ function drawFamilyPortrait() {
 
   // Draw static cracks
   cracks.forEach(crack => {
-    stroke(0); // Black color
+    stroke(0); 
     strokeWeight(1.5);
     noFill();
     beginShape();
@@ -166,7 +166,7 @@ function drawFamilyPortrait() {
 }
 
 function addCrackToPortrait() {
-  const numCracks = random(2, 5); // Number of cracks per forgive press
+  const numCracks = random(2, 5); 
   for (let i = 0; i < numCracks; i++) {
     let crack = generateCrackPath(random(0, 150), random(0, 200));
     cracks.push(crack);
@@ -244,20 +244,19 @@ function handleConversations() {
 
   if (forgivePressed) {
     conversationStage = 0;
-    addCrackToPortrait(); // Add static cracks when forgiving
+    addCrackToPortrait(); 
   }
 }
 
 function drawCharacters(leftImage, rightImage, quote, imgWidth, imgHeight, y, gap) {
   push();
-  translate(width / 2 - imgWidth - gap + imgWidth, y); // Flip horizontally
+  translate(width / 2 - imgWidth - gap + imgWidth, y); 
   scale(-1, 1);
   image(leftImage, 0, 0, imgWidth, imgHeight);
   pop();
 
   image(rightImage, width / 2 + gap, y, imgWidth, imgHeight);
 
-  // Dialogue box in the center
   const boxWidth = 800;
   const boxHeight = 150;
   const boxY = height - 300;

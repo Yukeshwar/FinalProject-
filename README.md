@@ -1,3 +1,63 @@
+Milestone 4:
+
+This project draws inspiration from The Godfather, a film that holds immense personal significance as it was one of the first movies I watched with my grandfather. The project simulates themes of power, loyalty, and family through an interactive digital-physical experience. By combining game mechanics, physical components, and symbolic visuals, it creates an immersive narrative-driven interaction.
+
+Description of External Data or Libraries
+
+p5.js: Utilized for rendering visual elements, including the map, family portrait, and interactive regions.
+
+p5.sound.js: Enables background music playback and sound effects, such as the Godfather theme and buzzer sounds during gameplay.
+
+p5.serial.js: Facilitates communication between the software and physical components via serial data.
+These libraries serve as the foundation for integrating visuals, sounds, and hardware interactivity seamlessly into the project.
+
+Description of Sensors, Output Components, and Mechanisms
+
+Mini Servo Motor: Functions as a seconds clock, where 180° rotation equals 60 seconds, providing a dynamic visual component.
+
+Two Potentiometers: Adjust the money and manpower levels in the game, with values represented visually on-screen.
+
+Two Buttons:
+Button 1: Connected to a red LED and buzzer; triggers attacks that convert rival regions to player-controlled green.
+Button 2: Connected to a green LED; ends conversations and adds cracks to the family portrait.
+
+Two LEDs: Provide real-time feedback for player decisions:
+Red LED: Indicates aggressive actions.
+Green LED: Symbolizes forgiveness or resolution.
+
+Buzzer: Provides auditory feedback during aggressive actions, adding tension to the gameplay.
+These components enhance the immersive experience, connecting the software with tangible interactions.
+
+Reference Images, Texts, and Projects
+
+Images: The project incorporates thematic visuals inspired by The Godfather, including the family portrait and a region-based map.
+
+Texts: Conversations with rivals are derived from The Godfather's memorable quotes, adapted to fit the gameplay narrative.
+
+Relevance of the Project
+
+How It Relates to Readings
+This project aligns with themes of control, conflict, and sacrifice, frequently explored in literature and cinema. The interactive gameplay simulates moral dilemmas and the ripple effects of decisions on power and personal relationships.
+
+Connection to Society
+The project reflects societal struggles in balancing ambition and family values. It challenges players to reflect on the cost of success, symbolized by cracks on the family portrait as power expands.
+
+Why It Is Important to Me
+The Godfather holds deep personal significance, symbolizing cherished moments with my grandfather. This project is a creative homage to those memories while also exploring the film's enduring themes of loyalty and sacrifice.
+
+Feedback from User Testing
+User testing offered valuable insights that shaped the project:
+
+Gameplay Timing: Users noted that region transitions felt too quick. The delay for rival regions to turn green was adjusted, improving pacing and tension.
+
+Symbolism of Cracks: Testers appreciated the addition of cracks on the family portrait, finding it a compelling representation of the trade-offs between power and family.
+
+Audio Integration: Players enjoyed the Godfather theme's integration but suggested including a mouse-controlled feature to toggle music, which was implemented.
+
+This project blends thematic inspiration, user interactivity, and physical components to deliver a meaningful experience. Through a narrative tied closely to The Godfather, it offers a reflection on the cost of ambition and the delicate balance between power and relationships. Feedback from users refined the gameplay, ensuring it resonates with both emotional and interactive depth.
+
+
+
 Milestone 3: 
 
 The project aimed to simulate territory control, betrayal, and forgiveness through an interactive experience using Arduino and p5.js. The prototype successfully integrates hardware components with visual elements, providing real-time updates and feedback. The development work involved creating a sketch file for visualizing the gameplay, writing the Arduino code to control the hardware, and connecting the two via serial communication.
